@@ -1,0 +1,155 @@
+﻿<%@ Master Language="C#" AutoEventWireup="True" CodeBehind="MasterPage.master.cs"
+    Inherits="SAWWiki.MasterPage" %>
+
+<%@ Register TagPrefix="saw" TagName="DisplayModeMenu" Src="~/uc/DisplayModeMenu.ascx" %>
+<%@ Register TagPrefix="saw" TagName="TopTen" Src="~/uc/TopTen.ascx" %>
+<%@ Register TagPrefix="saw" TagName="Login" Src="~/uc/WikiLogin.ascx" %>
+<%@ Register TagPrefix="saw" TagName="GoToPage" Src="~/uc/GoToPage.ascx" %>
+<%@ Register TagPrefix="saw" TagName="Search" Src="~/uc/SearchPage.ascx" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link type="text/css" href="images/SimpleBlog.css" rel="Stylesheet" />
+    <link rel="shortcut icon" href="http://www.sawinfotech.com/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="js/EditFunctions.js"></script>
+
+</head>
+<body>
+    <form id="form1" runat="server" style="margin: 0 0 0 0;">
+    <asp:WebPartManager ID="mgrMaster" runat="server">
+        <Personalization Enabled="true" InitialScope="User" />
+    </asp:WebPartManager>
+    <!-- Wrap -->
+    <div id="wrap">
+        <!-- Header -->
+        <div id="header">
+            <div id="searchform" style="float: right; vertical-align: bottom;">
+                <asp:WebPartZone ID="wpzCenterBottom" runat="server" HeaderText="Bottom Center" CloseVerb-Visible="false"
+                    BorderColor="#CCCCCC" Font-Names="Verdana">
+                    <CloseVerb Visible="False"></CloseVerb>
+                    <PartChromeStyle BorderStyle="None" />
+                </asp:WebPartZone>
+                <br />
+                <br />
+                <saw:Search ID="Search1" runat="server" />
+            </div>
+            <h1 id="logo">
+                SAW<span class="gray">Wiki</span>
+                <asp:Label ForeColor="Red" Font-Size="20px" ID="lblBeta" runat="server" Text="(beta)"></asp:Label>
+            </h1>
+            <h2 id="slogan">
+                "...sharing knowledge is a way to achieve immortality."</h2>
+        </div>
+        <!-- menu -->
+        <div id="menu">
+            <asp:BulletedList DisplayMode="LinkButton" ID="mainMenu" runat="server" OnClick="mainMenu_Click">
+                <asp:ListItem Text="Home" Value="Default.aspx"></asp:ListItem>
+                <asp:ListItem Text="My Page" Value="User.aspx"></asp:ListItem>
+                <asp:ListItem Text="Help" Value="Help.aspx"></asp:ListItem>
+                <asp:ListItem Text="About" Value="About.aspx"></asp:ListItem>
+            </asp:BulletedList>
+        </div>
+        <center>
+        <asp:Label ForeColor="Red" ID="lblBetaWarning" runat="server" Text="!!! This is the beta version. All features work in demo mode. !!!"></asp:Label>
+        </center>
+        <!--Content Wrap -->
+        <div id="content-wrap">
+            <div id="sidebar">
+                <h1>
+                    Quick Links</h1>
+                <ul class="sidemenu">
+                    <li><a href="Default.aspx">Home</a></li>
+                    <li>
+                        <asp:LoginStatus ID="loginStatus1" runat="server" LogoutPageUrl="~/Default.aspx" />
+                    </li>
+                </ul>
+                <asp:WebPartZone ID="wpzLeftTop" runat="server" HeaderText="Top Left" CloseVerb-Visible="false" MinimizeVerb-Visible="false" 
+                    BorderColor="#B6B8BB" Width="100%">
+                    <PartStyle BorderColor="#B6B8BB" BorderStyle="Solid" BorderWidth="1px" />
+                    <CloseVerb Visible="False"></CloseVerb>
+                    <PartTitleStyle CssClass="PartTitle" />
+                    <PartChromeStyle BorderStyle="None" />
+                </asp:WebPartZone>
+                <br />
+            </div>
+            <div id="main">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div>
+                    <saw:DisplayModeMenu ID="DisplayMenu1" runat="server" />
+                    <br />
+                    <br />
+                    <br />
+                    <asp:CatalogZone ID="CatalogZone1" runat="server" HeaderText="Add Web Parts">
+                        <ZoneTemplate>
+                            <asp:DeclarativeCatalogPart ID="catalogpart1" runat="server" Title="My Catalog">
+                                <WebPartsTemplate>
+                                    <saw:Search ID="wikiSearch1" runat="server" title=" " />
+                                    <saw:TopTen ID="wikiTopTen1" runat="server" title=" Top Ten" />
+                                    <saw:Login ID="wikiLogin1" runat="server" title=" Sign In" />
+                                    <saw:GoToPage ID="wikiGoTo1" runat="server" title=" Go To Page" />
+                                </WebPartsTemplate>
+                            </asp:DeclarativeCatalogPart>
+                        </ZoneTemplate>
+                    </asp:CatalogZone>
+                </div>
+            </div>
+            <!--End content-wrap-->
+        </div>
+        <!-- Footer -->
+        <div id="footer">
+            <p>
+                <asp:Literal ID="litFooter" runat="server"></asp:Literal>
+                &nbsp;&nbsp;|&nbsp; <a href="Help.aspx">Help</a>&nbsp;|&nbsp;
+                <a href="ContactUs.aspx">Contact us</a>&nbsp;|&nbsp; 
+                <a href="http://www.sawinfotech.com/SAWINFO/Disclaimer.aspx">T & C</a>&nbsp;|&nbsp; 
+                <a href="http://www.sawinfotech.com/Privacy.aspx">Privacy</a>&nbsp;|&nbsp;
+                <a href="http://www.sawinfotech.com">sawinfotech</a>&nbsp;|&nbsp;
+                
+            </p>
+        </div>
+        <!-- END Wrap -->
+    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td colspan="3">
+                <table>
+                    <tr valign="top">
+                        <td valign="top">
+                        </td>
+                        <td valign="top" width="100%">
+                        </td>
+                        <td valign="top">
+                            <asp:WebPartZone ID="wpzRightTop" runat="server" HeaderText="Top Right" CloseVerb-Visible="false">
+                                <CloseVerb Visible="False"></CloseVerb>
+                            </asp:WebPartZone>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:WebPartZone ID="wpzLeftBottom" runat="server" HeaderText="Bottom Left" CloseVerb-Visible="false">
+                    <CloseVerb Visible="False"></CloseVerb>
+                </asp:WebPartZone>
+            </td>
+            <td align="center">
+            </td>
+            <td align="right">
+                <asp:WebPartZone ID="wpzRightBottom" runat="server" HeaderText="Bottom Right" CloseVerb-Visible="false">
+                    <CloseVerb Visible="False"></CloseVerb>
+                </asp:WebPartZone>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
